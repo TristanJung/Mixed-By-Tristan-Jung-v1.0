@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mixed by Tristan Jung</title>
+  <meta name="description" content="Tristan Jung is a professional mix engineer based in Jackson Hole, Wyoming. Specializing in hip-hop and R&B mixing services for artists and labels. Hire a mix engineer with proven credits.">
+  <meta property="og:title" content="Mixed by Tristan Jung">
+  <meta property="og:description" content="Professional mix engineer based in Jackson Hole, Wyoming. Mixing for hip-hop and R&B artists.">
+  <meta property="og:url" content="https://tristanjung.net">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mixed by Tristan Jung">
+  <meta name="twitter:description" content="Professional mix engineer based in Jackson Hole, Wyoming.">
+  <link rel="canonical" href="https://tristanjung.net">
+  <style>
+    @font-face {
+      font-family: 'BROTHER';
+      src: url('Media/Fonts/BROTHER-Bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Mansalva';
+      src: url('Media/Fonts/Mansalva-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary-text: #3B2F2F;
+      --bg-primary: #8A9BA8;
+      --white: #ffffff;
+      --black: #000000;
+    }
+
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    .hero { overflow: visible; padding: 0 3%; }
+
+    body {
+      font-family: 'Mansalva', serif;
+      font-weight: 400;
+      background-color: #8A9BA8;
+      background-image: url('Media/ocean.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      pointer-events: none;
+      animation: fadeOut 0.4s ease-out 1.5s forwards;
+    }
+
+    .loader-bar {
+      width: 4px;
+      height: 40px;
+      background: #C9D2D6;
+      border-radius: 2px;
+      animation: waveRipple 0.8s ease-in-out infinite;
+    }
+
+    .loader-bar:nth-child(1) { animation-delay: 0s; }
+    .loader-bar:nth-child(2) { animation-delay: 0.1s; }
+    .loader-bar:nth-child(3) { animation-delay: 0.2s; }
+    .loader-bar:nth-child(4) { animation-delay: 0.3s; }
+    .loader-bar:nth-child(5) { animation-delay: 0.4s; }
+
+    @keyframes waveRipple {
+      0%, 100% { transform: scaleY(1); }
+      50%       { transform: scaleY(2.2); }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    .hero { text-align: center; animation: fadeInUp 1s ease-out 1.5s both; }
+
+    h1 {
+      font-family: 'BROTHER', serif;
+      font-weight: 400;
+      font-size: clamp(1.8rem, 10.8vw, 7.2rem);
+      letter-spacing: 1.5px;
+      color: #C9D2D6;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+      line-height: 1.1;
+    }
+
+    h1:hover { transform: translateY(-6px); }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9997;
+      background: linear-gradient(to bottom, #E2E8EA, #3A6F8A);
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <div class="hero">
+    <h1 id="hero-title">Mixed by Tristan Jung</h1>
+  </div>
+
+  <script>
+    (function () {
+      var transitioning = false;
+
+      function resetHero() {
+        // Remove any leftover transition overlay
+        var existing = document.querySelector('.transition-overlay');
+        if (existing) existing.remove();
+        transitioning = false;
+        // Replay the fade-in animation
+        var h1 = document.getElementById('hero-title');
+        var hero = document.querySelector('.hero');
+        hero.style.animation = 'none';
+        hero.getBoundingClientRect(); // force reflow
+        hero.style.animation = '';
+      }
+
+      // Fires when page is restored from bfcache (back button)
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) resetHero();
+      });
+
+      document.getElementById('hero-title').addEventListener('click', function () {
+        if (transitioning) return;
+        transitioning = true;
+        var overlay = document.createElement('div');
+        overlay.className = 'transition-overlay';
+        document.body.appendChild(overlay);
+        overlay.getBoundingClientRect();
+        overlay.style.opacity = '1';
+        var prefetch = new Image();
+        prefetch.src = 'Media/ocean.png';
+        sessionStorage.setItem('fromIndex', '1');
+        setTimeout(function () { window.location.href = 'portfolio.html'; }, 650);
+      });
+    })();
+  </script>
+</body>
+</html>

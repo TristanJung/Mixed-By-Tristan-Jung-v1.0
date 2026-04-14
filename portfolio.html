@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Selected works by Tristan Jung, professional mix engineer based in Jackson Hole, Wyoming. Hip-hop and R&B mixing credits include Supreme Dae, d4mon, LOM MAZI, Roy Michael ft. TheMIND, and more.">
+  <meta property="og:title" content="Mixed by Tristan Jung — Portfolio">
+  <meta property="og:description" content="Mix engineering credits: Supreme Dae, d4mon, LOM MAZI, Roy Michael, VERAXON, UoT, Titus Irons.">
+  <meta property="og:url" content="https://tristanjung.net/portfolio.html">
+  <link rel="canonical" href="https://tristanjung.net/portfolio.html">
+  <style>
+    @font-face {
+      font-family: 'Mansalva';
+      src: url('Media/Fonts/Mansalva-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary-text: #3B2F2F;
+      --bg-primary: #8A9BA8;
+      --white: #ffffff;
+      --black: #000000;
+      --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px;
+      --spacing-lg: 24px; --spacing-xl: 40px; --spacing-xxl: 64px;
+      --card-width: 420px;
+      --carousel-height: 645px;
+      --offset-1: 364px;
+      --offset-2: 589px;
+      --offset-3: 734px;
+    }
+    @media (max-width: 768px) {
+      :root {
+        --card-width: 285px;
+        --carousel-height: 480px;
+        --offset-1: 268px;
+      }
+    }
+    body {
+      font-family: 'Mansalva', serif;
+      font-weight: 400;
+      background-color: #9EB6C3;
+      background-image: linear-gradient(to bottom, rgba(226,232,234,0.60), rgba(58,111,138,0.60)), url('Media/ocean.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      min-height: 100vh;
+      color: var(--primary-text);
+      min-height: 100vh;
+    }
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: var(--spacing-xl) var(--spacing-xxl);
+      animation: fadeInDown 0.8s ease-out both;
+    }
+    @media (max-width: 768px) { .nav { padding: var(--spacing-lg); } }
+    .nav-link {
+      font-family: 'Mansalva', serif; font-weight: 400; font-size: 2.8rem;
+      color: var(--primary-text); text-decoration: none; border-radius: 35px;
+      padding: 2px 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: inline-block;
+    }
+    @media (max-width: 768px) { .nav-link { font-size: 1.9rem; } }
+    .nav-link:hover { transform: scale(1.05); }
+    /* MAIN */
+    main { padding-top: 140px; padding-bottom: var(--spacing-xxl); }
+    /* WORKS */
+    .works-section {
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .section-heading {
+      font-family: 'Mansalva', serif; font-weight: 400;
+      font-size: clamp(3rem, 6vw, 5rem); letter-spacing: -1px;
+      color: var(--primary-text); text-align: center;
+      margin-bottom: var(--spacing-xxl);
+    }
+    @media (max-width: 768px) {
+      .section-heading { font-size: 2.5rem; margin-bottom: var(--spacing-xl); }
+    }
+    /* CAROUSEL */
+    .carousel-wrapper {
+      position: relative; width: 100%; height: var(--carousel-height);
+      overflow: hidden; user-select: none; cursor: grab; touch-action: pan-y;
+    }
+    .carousel-wrapper.dragging { cursor: grabbing; }
+    .carousel-track { position: relative; width: 100%; height: 100%; }
+    .card {
+      position: absolute; left: 50%; top: 50%;
+      width: var(--card-width);
+      opacity: 0; pointer-events: none;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  filter 0.4s cubic-bezier(0.4,0,0.2,1),
+                  opacity 0.3s ease;
+      z-index: 2;
+    }
+    .work-image {
+      width: 100%; aspect-ratio: 1; border-radius: 20px;
+      overflow: hidden; position: relative;
+    }
+    .work-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; pointer-events: none;
+    }
+    .work-info { padding: 25px 4px 0; text-align: center; user-select: none; }
+    .work-title {
+      font-family: 'Mansalva', serif; font-weight: 400;
+      font-size: 2.4rem; letter-spacing: -0.5px; color: #C9D2D6; line-height: 1.3;
+    }
+    .work-artist {
+      font-family: 'Mansalva', serif; font-weight: 400;
+      font-size: 1.6rem; letter-spacing: 0.02em;
+      color: #C9D2D6; opacity: 0.8; margin-top: 4px; line-height: 1.4;
+    }
+    /* PROGRESS */
+
+    /* AUDIO PROGRESS */
+    .audio-progress-container {
+      display: none; justify-content: center; margin-top: 16px;
+    }
+    .audio-progress-container.visible { display: flex; }
+    .audio-progress-bar {
+      position: relative; width: 250px; height: 2px;
+      background: rgba(59,47,47,0.2); border-radius: 1px; cursor: pointer;
+    }
+    @media (max-width: 768px) { .audio-progress-bar { width: 175px; } }
+    .audio-progress-fill {
+      position: absolute; top: 0; left: 0; height: 100%;
+      background: var(--primary-text); border-radius: 1px; width: 0%;
+      transition: width 0.1s linear;
+    }
+    .audio-progress-dot {
+      position: absolute; top: 50%; width: 8px; height: 8px;
+      border-radius: 50%; background: var(--primary-text);
+      transform: translate(-50%, -50%); left: 0%;
+      transition: left 0.1s linear;
+    }
+    /* IFRAME ROW */
+    .carousel-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; padding: 0 24px;
+    }
+    .iframe-col {
+      flex: 0 0 312px; display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+    }
+    .iframe-col iframe { width: 100%; height: 500px; border: none; border-radius: 12px; }
+    .iframe-label {
+      font-family: 'Mansalva', serif; font-size: 0.85rem;
+      color: var(--primary-text); opacity: 0.5; text-align: center;
+    }
+    @media (max-width: 768px) {
+      .iframe-col { display: none; }
+      .carousel-row { padding: 0; }
+    }
+    /* FOOTER */
+    .contact-footer {
+      display: flex; flex-direction: column; align-items: center;
+      gap: var(--spacing-lg); padding: var(--spacing-xxl) var(--spacing-lg);
+    }
+    .footer-email {
+      font-family: 'Mansalva', serif; font-weight: 400; font-size: 1.5rem;
+      color: var(--primary-text); text-decoration: none;
+      transition: transform 0.3s; display: inline-block;
+      position: relative; cursor: pointer;
+    }
+    .footer-email:hover { transform: translateY(-3px); }
+    .footer-instagram {
+      color: var(--primary-text); transition: transform 0.3s; display: inline-flex;
+    }
+    .footer-instagram:hover { transform: translateY(-3px); }
+    .footer-apple-music {
+      color: var(--primary-text); transition: transform 0.3s; display: inline-flex;
+    }
+    .footer-apple-music:hover { transform: translateY(-3px); }
+    .footer-spotify {
+      color: var(--primary-text); transition: transform 0.3s; display: inline-flex;
+    }
+    .footer-spotify:hover { transform: translateY(-3px); }
+    /* TOOLTIP */
+    .tooltip {
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-primary); color: var(--primary-text);
+      font-family: 'Mansalva', serif; font-size: 0.75rem;
+      padding: 4px 8px; border-radius: 6px;
+      white-space: nowrap; pointer-events: none;
+      opacity: 0; transition: opacity 0.15s; z-index: 10;
+    }
+    .tooltip.show { opacity: 1; }
+    /* MODALS */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.8);
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--spacing-lg); overflow-y: auto;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .modal-backdrop.open { opacity: 1; visibility: visible; }
+    .modal-card {
+      position: relative; background: var(--bg-primary);
+      border-radius: 30px; padding: var(--spacing-xxl);
+      width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto;
+      transform: translateY(50px);
+      transition: transform 0.3s ease-out;
+    }
+    @media (max-width: 768px) { .modal-card { width: 95%; padding: var(--spacing-xl); } }
+    .modal-backdrop.open .modal-card { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: var(--spacing-lg); right: var(--spacing-lg);
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--primary-text); background: transparent;
+      color: var(--primary-text); font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); font-family: sans-serif;
+    }
+    .modal-close:hover { transform: rotate(90deg); }
+    .modal-heading {
+      font-family: 'Mansalva', serif; font-weight: 400;
+      font-size: 3rem; letter-spacing: -1px;
+      color: var(--primary-text); margin-bottom: var(--spacing-xl);
+    }
+    @media (max-width: 768px) { .modal-heading { font-size: 2rem; } }
+    .modal-body p {
+      font-family: 'Mansalva', serif; font-weight: 400;
+      font-size: 2rem; letter-spacing: 0.02em;
+      color: var(--primary-text); line-height: 1.7;
+    }
+    .contact-email-wrapper { position: relative; display: inline-block; margin-bottom: var(--spacing-lg); }
+    .contact-email {
+      font-family: 'Mansalva', serif; font-weight: 400; font-size: 1.5rem;
+      color: var(--primary-text); text-decoration: none; cursor: pointer; display: inline-block;
+    }
+    .modal-instagram {
+      color: var(--primary-text); display: inline-flex; align-items: center;
+      transition: transform 0.3s; text-decoration: none;
+    }
+    .modal-instagram:hover { transform: translateY(-3px); }
+    /* CONTACT FORM */
+    .contact-form { display: flex; flex-direction: column; gap: var(--spacing-lg); }
+    .form-group { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+    .form-label {
+      font-family: 'Mansalva', serif; font-weight: 400; font-size: 1rem;
+      letter-spacing: 0.02em; color: var(--primary-text);
+    }
+    .form-input {
+      font-family: 'Mansalva', serif; font-weight: 400; font-size: 1rem;
+      color: var(--primary-text); background: rgba(255,255,255,0.3);
+      border: 1.5px solid rgba(59,47,47,0.3); border-radius: 12px;
+      padding: 12px 16px; outline: none; width: 100%;
+      transition: border-color 0.2s;
+    }
+    .form-input::placeholder { color: rgba(59,47,47,0.4); }
+    .form-input:focus { border-color: var(--primary-text); }
+    .form-textarea { resize: vertical; min-height: 140px; }
+    .form-submit {
+      font-family: 'Mansalva', serif; font-weight: 400; font-size: 1.1rem;
+      color: var(--primary-text); background: rgba(255,255,255,0.35);
+      border: 1.5px solid rgba(59,47,47,0.3); border-radius: 35px;
+      padding: 12px 40px; cursor: pointer; align-self: flex-start;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .form-submit:hover { transform: scale(1.03); background: rgba(255,255,255,0.5); }
+    .section-subheading {
+      font-family: 'Mansalva', serif; font-weight: 400;
+      font-size: 1.5rem; letter-spacing: 0.04em;
+      color: var(--primary-text); opacity: 0.6;
+      text-align: center; margin-top: -40px; margin-bottom: var(--spacing-xxl);
+    }
+    @media (max-width: 768px) { .section-subheading { margin-top: -28px; margin-bottom: var(--spacing-xl); } }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+
+
+
+<nav class="nav" aria-label="Site navigation">
+  <div class="nav-left">
+    <a href="#" class="nav-link" id="about-link" role="button">About</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="nav-link" id="contact-link" role="button">Contact</a>
+  </div>
+</nav>
+
+<main>
+  <section class="works-section" id="works-section" aria-label="Selected Works">
+    <h2 class="section-heading">Selected Works</h2>
+    <p class="section-subheading">(click to listen!)</p>
+
+    <div class="carousel-row">
+
+  <!-- LEFT: Spotify -->
+  <div class="iframe-col">
+    <iframe
+      src="https://open.spotify.com/embed/playlist/7rgTSkcV0kuBZ20cDd1AvY"
+      height="500"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- CENTER: carousel + progress bar -->
+  <div style="flex: 1; min-width: 0;">
+    <div class="carousel-wrapper" id="carousel-wrapper" tabindex="0" role="region" aria-label="Portfolio carousel">
+      <div class="carousel-track" id="carousel-track">
+
+        <div class="card" data-index="0" data-audio="Media/Audio/ltah.mp3">
+          <div class="work-image">
+            <img src="Media/Photo Media/ltah.jpg" alt="LTAH cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">LTAH</div>
+            <div class="work-artist">UoT</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="1" data-audio="Media/Audio/work-it-out.mp3">
+          <div class="work-image">
+            <img src="Media/Photo Media/Work it Out cover.jpg" alt="Work it Out cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Work it Out</div>
+            <div class="work-artist">d4mon</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="2" data-audio="Media/Audio/eve.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/eve cover.jpg" alt="EVE cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">EVE</div>
+            <div class="work-artist">Roy Michael &amp; theMIND</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="3" data-audio="Media/Audio/escape-the-loop.mp3">
+          <div class="work-image">
+            <img src="Media/Photo Media/escapetheloop cover.jpg" alt="Escape the Loop cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Escape the Loop</div>
+            <div class="work-artist">Roy Michael ft. TheMIND</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="4" data-audio="Media/Audio/1000-hp-to-tha-wheels.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/1000hp.jpg" alt="1,000 HP TO THA WHEELS cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">1,000 HP TO THA WHEELS</div>
+            <div class="work-artist">UoT</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="5" data-audio="Media/Audio/play-bout-you.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/1000hp.jpg" alt="PLAY BOUT YOU cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">PLAY BOUT YOU</div>
+            <div class="work-artist">UoT</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="6" data-audio="Media/Audio/uot-on-my-skin.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/1000hp.jpg" alt="UoT ON MY SKIN cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">UoT ON MY SKIN</div>
+            <div class="work-artist">UoT</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="7" data-audio="Media/Audio/new-chanel.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/new chanel cover.jpg" alt="New Chanel cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">New Chanel</div>
+            <div class="work-artist">Supreme Dae ft. d4mon &amp; LOM MAZI</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="8" data-spotify="https://open.spotify.com/track/5W0jyEYv0Hvuo2RszEiC8z">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/actingup cover.jpg" alt="ActingUp cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">ActingUp</div>
+            <div class="work-artist">d4mon</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="9" data-audio="Media/Audio/2s!des.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/2s!des cover.jpg" alt="2s!des cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">2s!des</div>
+            <div class="work-artist">d4mon</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="10" data-audio="Media/Audio/flawed.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/Flawed cover.jpg" alt="Flawed cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Flawed</div>
+            <div class="work-artist">d4mon, SupremeDae, LOM MAZI</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="11" data-spotify="https://open.spotify.com/album/6dE0RjsnZWLeNSCbWkxedC">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/Janym cover.jpg" alt="Janym cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Janym</div>
+            <div class="work-artist">Jass.</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="12" data-audio="Media/Audio/adrenaline.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/adrenaline cover.jpg" alt="Adrenaline cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Adrenaline</div>
+            <div class="work-artist">VERAXON</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="13" data-audio="Media/Audio/wimbledon.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/wimbledon cover.jpg" alt="Wimbledon 25' cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Wimbledon 25'</div>
+            <div class="work-artist">SupremeDae</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="14" data-audio="Media/Audio/dnd.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/DND cover.jpg" alt="DND cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">DND</div>
+            <div class="work-artist">LOM MAZI &amp; SupremeDae ft. d4mon</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="15" data-audio="Media/Audio/far-not-far-really.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/far not far cover.jpg" alt="Far Not Far Really cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Far Not Far Really</div>
+            <div class="work-artist">LOM MAZI ft. Seddy Hendrinx</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="16" data-audio="Media/Audio/red-light-green-light.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/LUV3 Tape 3 cover.jpg" alt="Red Light Green Light cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Red Light Green Light</div>
+            <div class="work-artist">Titus Irons</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="17" data-audio="Media/Audio/go.mp3">
+          <div class="work-image">
+            <img loading="lazy" src="Media/Photo Media/LUV3 Tape 3 cover.jpg" alt="Go! cover art">
+          </div>
+          <div class="work-info">
+            <div class="work-title">Go!</div>
+            <div class="work-artist">Titus Irons</div>
+          </div>
+        </div>
+
+      </div><!-- /carousel-track -->
+    </div><!-- /carousel-wrapper -->
+
+
+    <div class="audio-progress-container" id="audio-progress-container" aria-hidden="true">
+      <div class="audio-progress-bar" id="audio-progress-bar">
+        <div class="audio-progress-fill" id="audio-progress-fill"></div>
+        <div class="audio-progress-dot" id="audio-progress-dot"></div>
+      </div>
+    </div>
+  </div><!-- /carousel-center -->
+
+  <!-- RIGHT: Apple Music -->
+  <div class="iframe-col">
+    <iframe
+      src="https://embed.music.apple.com/us/playlist/mixed-by-tristan-jung/pl.u-9N9L1EbTx98l5b3?theme=dark"
+      height="500"
+      allow="autoplay *; encrypted-media *; fullscreen *"
+      loading="lazy">
+    </iframe>
+  </div>
+
+</div><!-- /carousel-row -->
+  </section>
+</main>
+
+<footer class="contact-footer" id="contact-footer" aria-label="Contact">
+  <div style="position:relative;display:inline-block;">
+    <a href="mailto:tristanjung.engineer@gmail.com" class="footer-email" id="footer-email">tristanjung.engineer@gmail.com</a>
+    <span class="tooltip" id="footer-tooltip">Copied!</span>
+  </div>
+  <div style="display:flex; gap: var(--spacing-lg); align-items:center;">
+  <a href="https://www.instagram.com/1tristanjung/" target="_blank" rel="noopener noreferrer" class="footer-instagram" aria-label="Instagram">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="6" ry="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+    </svg>
+  </a>
+  <a href="https://music.apple.com/us/playlist/mixed-by-tristan-jung/pl.u-9N9L1EbTx98l5b3" target="_blank" rel="noopener noreferrer" class="footer-apple-music" aria-label="Apple Music">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Outer rounded square -->
+      <rect x="2" y="2" width="20" height="20" rx="6" ry="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <!-- Music note -->
+      <path d="M15 7.5v6.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M15 7.5l-5 1.25v6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Note heads -->
+      <circle cx="10" cy="15.25" r="1.25" fill="currentColor"/>
+      <circle cx="15" cy="13.75" r="1.25" fill="currentColor"/>
+    </svg>
+  </a>
+  <a href="https://open.spotify.com/playlist/7rgTSkcV0kuBZ20cDd1AvY?si=4cb68c5d85074c1e" target="_blank" rel="noopener noreferrer" class="footer-spotify" aria-label="Spotify">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Outer rounded square -->
+      <rect x="2" y="2" width="20" height="20" rx="6" ry="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      <!-- Spotify bars: three arcs -->
+      <path d="M7.5 10.5 C10 9, 14 9, 16.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M8.5 13 C10.5 11.8, 13.5 11.8, 15.5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M9.5 15.5 C11 14.6, 13 14.6, 14.5 15.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    </svg>
+  </a>
+  </div>
+</footer>
+
+<!-- About Modal -->
+<div class="modal-backdrop" id="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-heading">
+  <div class="modal-card">
+    <button class="modal-close" id="about-close" aria-label="Close">&#x2715;</button>
+    <h2 class="modal-heading" id="about-heading">About</h2>
+    <div class="modal-body">
+      <p>Tristan Jung is a mix engineer based in Cape Cod, Massachusetts.<br><br>He approaches each project with great care, a fresh perspective, an open mind, and open ears.<br><br>His focus is to always deliver mixes that are true to the artist, their vision, and, most importantly, to make that process as fun, open, and collaborative as possible</p>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div class="modal-backdrop" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-heading">
+  <div class="modal-card">
+    <button class="modal-close" id="contact-close" aria-label="Close">&#x2715;</button>
+    <h2 class="modal-heading" id="contact-heading">Get In Touch</h2>
+    <div class="modal-body">
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="form-name">Name</label>
+          <input class="form-input" type="text" id="form-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="form-email">Email</label>
+          <input class="form-input" type="email" id="form-email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="form-message">Message</label>
+          <textarea class="form-input form-textarea" id="form-message" name="message" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── CAROUSEL ── */
+  var INITIAL_INDEX = 0;
+  var TOTAL_CARDS = 18;
+  var currentCardIndex = INITIAL_INDEX;
+  var currentAudio = null;
+
+  var wrapper   = document.getElementById('carousel-wrapper');
+  var cards     = Array.from(document.querySelectorAll('.card'));
+  var audioProgressContainer = document.getElementById('audio-progress-container');
+  var audioProgressFill = document.getElementById('audio-progress-fill');
+  var audioProgressDot  = document.getElementById('audio-progress-dot');
+  var audioRafId = null;
+
+  function updateAudioProgress() {
+    if (!currentAudio || currentAudio.duration === 0 || isNaN(currentAudio.duration)) {
+      audioRafId = requestAnimationFrame(updateAudioProgress);
+      return;
+    }
+    var pct = (currentAudio.currentTime / currentAudio.duration) * 100;
+    audioProgressFill.style.width = pct + '%';
+    audioProgressDot.style.left   = pct + '%';
+    if (!currentAudio.paused && !currentAudio.ended) {
+      audioRafId = requestAnimationFrame(updateAudioProgress);
+    }
+  }
+
+  function startAudioProgress() {
+    audioProgressContainer.classList.add('visible');
+    if (audioRafId) cancelAnimationFrame(audioRafId);
+    audioRafId = requestAnimationFrame(updateAudioProgress);
+  }
+
+  function stopAudioProgress(reset) {
+    if (audioRafId) { cancelAnimationFrame(audioRafId); audioRafId = null; }
+    if (reset) {
+      audioProgressContainer.classList.remove('visible');
+      audioProgressFill.style.width = '0%';
+      audioProgressDot.style.left   = '0%';
+    }
+  }
+
+  // Scrubbing
+  document.getElementById('audio-progress-bar').addEventListener('click', function (e) {
+    if (!currentAudio) return;
+    var rect = this.getBoundingClientRect();
+    var pct = (e.clientX - rect.left) / rect.width;
+    currentAudio.currentTime = pct * currentAudio.duration;
+    if (!audioRafId) audioRafId = requestAnimationFrame(updateAudioProgress);
+  });
+
+  function isMobile() { return window.innerWidth <= 768; }
+
+  function updateCarousel() {
+    var offsets  = isMobile() ? [0, 268] : [0, 364, 589, 734];
+    var scales   = [1, 0.65, 0.4, 0.25];
+    
+    var maxDist  = isMobile() ? 1 : 3;
+
+    cards.forEach(function (card) {
+      var idx    = parseInt(card.dataset.index, 10);
+      var dist   = idx - currentCardIndex;
+      // Wrap to shortest path around the circle
+      if (dist > TOTAL_CARDS / 2)  dist -= TOTAL_CARDS;
+      if (dist < -TOTAL_CARDS / 2) dist += TOTAL_CARDS;
+      var absDist = Math.abs(dist);
+
+      card.classList.remove('center', 'adj', 'outer');
+
+      if (absDist > maxDist) {
+        card.style.opacity = '0';
+        card.style.pointerEvents = 'none';
+        var farX = (dist < 0 ? -1 : 1) * (offsets[maxDist] + 200);
+        card.style.transform = 'translateX(calc(' + farX + 'px - 50%)) translateY(-50%) scale(0.3)';
+        return;
+      }
+
+      var sign    = dist <= 0 ? -1 : 1;
+      if (dist === 0) sign = 0;
+      var offsetPx = offsets[absDist];
+      var actualX  = sign * offsetPx;
+      var scale    = scales[absDist];
+      
+
+      card.style.opacity = '1';
+      card.style.pointerEvents = 'auto';
+      card.style.transform = 'translateX(calc(' + actualX + 'px - 50%)) translateY(-50%) scale(' + scale + ')';
+      
+
+      if (absDist === 0) { card.classList.add('center'); card.style.zIndex = '3'; }
+      else if (absDist === 1) { card.classList.add('adj'); card.style.zIndex = '2'; }
+      else { card.classList.add('outer'); card.style.zIndex = '1'; }
+    });
+
+
+  }
+
+  function goTo(index) {
+    var wrapped = ((index % TOTAL_CARDS) + TOTAL_CARDS) % TOTAL_CARDS;
+    if (wrapped === currentCardIndex) return;
+    index = wrapped;
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio = null;
+      stopAudioProgress(true);
+    }
+    currentCardIndex = index;
+    updateCarousel();
+  }
+
+  function advance(dir) { goTo(currentCardIndex + dir); }
+
+  /* card clicks */
+  cards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      var idx  = parseInt(card.dataset.index, 10);
+      var dist = Math.abs(idx - currentCardIndex);
+      if (dist !== 0) { goTo(idx); return; }
+
+      var audioSrc  = card.dataset.audio;
+      var spotifyUrl = card.dataset.spotify;
+
+      if (spotifyUrl) { window.open(spotifyUrl, '_blank', 'noopener,noreferrer'); return; }
+      if (!audioSrc) return;
+
+      if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        stopAudioProgress(false);
+      } else if (currentAudio && currentAudio.paused) {
+        currentAudio.play().catch(function(){});
+        startAudioProgress();
+      } else {
+        var audio = new Audio(audioSrc);
+        audio.preload = 'none';
+        currentAudio = audio;
+        audio.play().catch(function(){});
+        startAudioProgress();
+        audio.addEventListener('play',  function () { startAudioProgress(); });
+        audio.addEventListener('ended', function () {
+          stopAudioProgress(true);
+          currentAudio = null;
+        });
+      }
+    });
+  });
+
+  /* keyboard */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  advance(-1);
+    if (e.key === 'ArrowRight') advance(1);
+  });
+
+  /* drag (desktop) */
+  var dragStartX = null;
+  var didDrag = false;
+  var DRAG_THRESHOLD = 50;
+
+  wrapper.addEventListener('mousedown', function (e) {
+    dragStartX = e.clientX; didDrag = false;
+    wrapper.classList.add('dragging');
+  });
+  document.addEventListener('mousemove', function (e) {
+    if (dragStartX === null) return;
+    if (Math.abs(e.clientX - dragStartX) > 5) didDrag = true;
+  });
+  document.addEventListener('mouseup', function (e) {
+    if (dragStartX === null) return;
+    var delta = e.clientX - dragStartX;
+    if (didDrag && Math.abs(delta) > DRAG_THRESHOLD) advance(delta < 0 ? 1 : -1);
+    dragStartX = null; didDrag = false;
+    wrapper.classList.remove('dragging');
+  });
+
+  /* swipe (mobile) */
+  var touchStartX = null;
+  wrapper.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  wrapper.addEventListener('touchend', function (e) {
+    if (touchStartX === null) return;
+    var delta = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) > DRAG_THRESHOLD) advance(delta < 0 ? 1 : -1);
+    touchStartX = null;
+  }, { passive: true });
+
+  /* resize */
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateCarousel, 100);
+  });
+
+  updateCarousel();
+
+  /* ── MODALS ── */
+  function openModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeAll() {
+    document.querySelectorAll('.modal-backdrop.open').forEach(function (m) {
+      m.classList.remove('open');
+    });
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('about-link').addEventListener('click', function (e) { e.preventDefault(); openModal('about-modal'); });
+  document.getElementById('contact-link').addEventListener('click', function (e) { e.preventDefault(); openModal('contact-modal'); });
+  document.getElementById('about-close').addEventListener('click', function () { closeModal('about-modal'); });
+  document.getElementById('contact-close').addEventListener('click', function () { closeModal('contact-modal'); });
+
+  document.querySelectorAll('.modal-backdrop').forEach(function (bd) {
+    bd.addEventListener('click', function (e) {
+      if (e.target === bd) { bd.classList.remove('open'); document.body.style.overflow = ''; }
+    });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+
+  /* ── CLIPBOARD ── */
+  var EMAIL = 'tristanjung.engineer@gmail.com';
+  var ttTimer = null;
+  function copyEmail(tooltipEl) {
+    function show() {
+      if (ttTimer) clearTimeout(ttTimer);
+      tooltipEl.classList.add('show');
+      ttTimer = setTimeout(function () { tooltipEl.classList.remove('show'); }, 1500);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(EMAIL).then(show).catch(show);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = EMAIL; ta.style.cssText = 'position:fixed;opacity:0;';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta); show();
+    }
+  }
+  document.getElementById('footer-email').addEventListener('click', function (e) { e.preventDefault(); copyEmail(document.getElementById('footer-tooltip')); });
+
+
+  /* ── SCROLL ANIMATIONS ── */
+  var animEls = [document.getElementById('works-section'), document.getElementById('contact-footer')];
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    animEls.forEach(function (el) {
+      if (el) { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out'; io.observe(el); }
+    });
+    /* fallback: if already in viewport, trigger immediately */
+    setTimeout(function () {
+      animEls.forEach(function (el) {
+        if (el && el.style.opacity === '0') {
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }
+        }
+      });
+    }, 200);
+  }
+
+})();
+</script>
+</body>
+</html>

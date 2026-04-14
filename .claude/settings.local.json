@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -lh \"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/\"*.html)",
+      "Bash(FILE=\"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/portfolio.html\")",
+      "Bash(sed -i '' 's/font-size: 1\\\\.9rem; letter-spacing: -0\\\\.5px; color: var\\(--primary-text\\)/font-size: 1.9rem; letter-spacing: -0.5px; color: #C46A4A/' \"$FILE\")",
+      "Bash(sed -i '' 's/color: var\\(--primary-text\\); opacity: 0\\\\.8; margin-top: 4px/color: #C46A4A; opacity: 0.8; margin-top: 4px/' \"$FILE\")",
+      "Read(//Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/**)",
+      "Bash(sed -i '' 's/font-size: 1\\\\.9rem; letter-spacing: -0\\\\.5px; color: #C46A4A/font-size: 1.9rem; letter-spacing: -0.5px; color: var\\(--primary-text\\)/' \"$FILE\")",
+      "Bash(sed -i '' 's/color: #C46A4A; opacity: 0\\\\.8; margin-top: 4px/color: var\\(--primary-text\\); opacity: 0.8; margin-top: 4px/' \"$FILE\")",
+      "Bash(for FILE in \"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/index.html\" \"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/portfolio.html\")",
+      "Bash(do)",
+      "Bash(sed -i '' 's/background-image: url\\(.Media\\\\/texture\\\\.png.\\);/background-color: #8A9BA8;\\\\n      background-image: url\\(''''Media\\\\/texture.png''''\\);/' \"$FILE\")",
+      "Bash(done)",
+      "Bash(sed -i '' 's/font-size: 1\\\\.9rem; letter-spacing: -0\\\\.5px; color: var\\(--primary-text\\)/font-size: 1.9rem; letter-spacing: -0.5px; color: #4A3A2A/' \"$FILE\")",
+      "Bash(sed -i '' 's/color: var\\(--primary-text\\); opacity: 0\\\\.8; margin-top: 4px/color: #4A3A2A; opacity: 0.8; margin-top: 4px/' \"$FILE\")",
+      "Bash(sed -i '' 's/top: 5%; bottom: 5%;/top: 3%; bottom: 3%;/' \"$FILE\")",
+      "Bash(sed -i '' 's/left: 5%; right: 5%;/left: 3%; right: 3%;/' \"$FILE\")",
+      "Bash(sed -i '' 's/background-color: #C0EBF7/background-color: #8A9BA8/g' \"$FILE\")",
+      "Bash(sed -i '' 's/background: #9BDFF2/background: #8A9BA8/g' \"$FILE\")",
+      "Bash(python3:*)",
+      "Bash(__NEW_LINE_4cb529ca27c6ad19__ sed:*)",
+      "Bash(sed -i '' 's/--offset-2: 465px/--offset-2: 473px/' \"$FILE\")",
+      "Bash(sed -i '' 's/--offset-1: 260px/--offset-1: 268px/' \"$FILE\")",
+      "Bash(sed -i '' 's/var offsets  = isMobile\\(\\) ? \\\\[0, 260\\\\] : \\\\[0, 285, 465\\\\]/var offsets  = isMobile\\(\\) ? [0, 268] : [0, 293, 473]/' \"$FILE\")",
+      "Bash(__NEW_LINE_4cb529ca27c6ad19__ grep:*)",
+      "Bash(sed -i '' 's|https://open.spotify.com/search/ActingUp%20d4mon|https://open.spotify.com/track/5W0jyEYv0Hvuo2RszEiC8z|' \"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/portfolio.html\")",
+      "Bash(sed -i '' 's|https://open.spotify.com/search/Janym%20Jass|https://open.spotify.com/album/6dE0RjsnZWLeNSCbWkxedC|' \"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/portfolio.html\")"
+    ]
+  }
+}
