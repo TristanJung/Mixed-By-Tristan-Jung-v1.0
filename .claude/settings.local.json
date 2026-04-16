@@ -25,7 +25,8 @@
       "Bash(sed -i '' 's/var offsets  = isMobile\\(\\) ? \\\\[0, 260\\\\] : \\\\[0, 285, 465\\\\]/var offsets  = isMobile\\(\\) ? [0, 268] : [0, 293, 473]/' \"$FILE\")",
       "Bash(__NEW_LINE_4cb529ca27c6ad19__ grep:*)",
       "Bash(sed -i '' 's|https://open.spotify.com/search/ActingUp%20d4mon|https://open.spotify.com/track/5W0jyEYv0Hvuo2RszEiC8z|' \"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/portfolio.html\")",
-      "Bash(sed -i '' 's|https://open.spotify.com/search/Janym%20Jass|https://open.spotify.com/album/6dE0RjsnZWLeNSCbWkxedC|' \"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/portfolio.html\")"
+      "Bash(sed -i '' 's|https://open.spotify.com/search/Janym%20Jass|https://open.spotify.com/album/6dE0RjsnZWLeNSCbWkxedC|' \"/Users/tristanjung/Desktop/CS+AI/My Website/attempt 2/portfolio.html\")",
+      "Bash(node -e ':*)"
     ]
   }
 }
