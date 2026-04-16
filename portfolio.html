@@ -152,8 +152,9 @@
       font-family: 'Mansalva', serif; font-size: 0.85rem;
       color: var(--primary-text); opacity: 0.5; text-align: center;
     }
-    @media (max-width: 1399px) {
+    @media (max-width: 768px) {
       .iframe-col { display: none; }
+      .carousel-row { padding: 0; }
     }
     /* FOOTER */
     .contact-footer {
@@ -650,22 +651,10 @@
   function isMobile() { return window.innerWidth <= 768; }
 
   function updateCarousel() {
-    // Read actual carousel pixel width after CSS layout (accounts for iframes being shown/hidden)
-    var cw = wrapper.offsetWidth;
-    if (cw <= 0) cw = 300;
-
-    var maxDist = 1; // always show exactly 3 cards
-
-    // Card width: 68% of carousel, capped at breakpoint maximum
-    var maxCardW = isMobile() ? 285 : 420;
-    var cardW = Math.min(Math.round(cw * 0.68), maxCardW);
-    document.documentElement.style.setProperty('--card-width', cardW + 'px');
-    document.documentElement.style.setProperty('--carousel-height', (cardW + 160) + 'px');
-
-    // Offsets proportional to carousel width — adjacent at 27% from center
-    var adj = cw * 0.27;
-    var offsets = [0, adj, adj * 1.62, adj * 2.02];
-    var scales  = [1, 0.75, 0.65, 0.4];
+    var offsets  = isMobile() ? [0, 268] : [0, 364, 589, 734];
+    var scales   = [1, 0.65, 0.4, 0.25];
+    
+    var maxDist  = isMobile() ? 1 : 3;
 
     cards.forEach(function (card) {
       var idx    = parseInt(card.dataset.index, 10);
@@ -685,19 +674,24 @@
         return;
       }
 
-      var sign     = dist < 0 ? -1 : dist > 0 ? 1 : 0;
+      var sign    = dist <= 0 ? -1 : 1;
+      if (dist === 0) sign = 0;
       var offsetPx = offsets[absDist];
       var actualX  = sign * offsetPx;
       var scale    = scales[absDist];
+      
 
       card.style.opacity = '1';
       card.style.pointerEvents = 'auto';
       card.style.transform = 'translateX(calc(' + actualX + 'px - 50%)) translateY(-50%) scale(' + scale + ')';
+      
 
       if (absDist === 0) { card.classList.add('center'); card.style.zIndex = '3'; }
       else if (absDist === 1) { card.classList.add('adj'); card.style.zIndex = '2'; }
       else { card.classList.add('outer'); card.style.zIndex = '1'; }
     });
+
+
   }
 
   function goTo(index) {
