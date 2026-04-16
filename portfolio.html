@@ -276,6 +276,8 @@
     }
 
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('o6BhzKwJ3Vb7EDXoj');</script>
 </head>
 <body>
 
@@ -841,6 +843,29 @@
   }
   document.getElementById('footer-email').addEventListener('click', function (e) { e.preventDefault(); copyEmail(document.getElementById('footer-tooltip')); });
 
+
+  /* ── CONTACT FORM ── */
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = this.querySelector('.form-submit');
+    var original = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    emailjs.send('service_zidmuke', 'template_nkghsxr', {
+      from_name: document.getElementById('form-name').value,
+      reply_to:  document.getElementById('form-email').value,
+      message:   document.getElementById('form-message').value,
+    }).then(function () {
+      btn.textContent = 'Sent!';
+      document.getElementById('contact-form').reset();
+      setTimeout(function () { btn.textContent = original; btn.disabled = false; }, 2500);
+    }).catch(function () {
+      btn.textContent = 'Failed — try again';
+      btn.disabled = false;
+      setTimeout(function () { btn.textContent = original; }, 2500);
+    });
+  });
 
   /* ── SCROLL ANIMATIONS ── */
   var animEls = [document.getElementById('works-section'), document.getElementById('contact-footer')];
